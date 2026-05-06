@@ -1,0 +1,9 @@
+{
+  "id": "clicker",
+  "title": "Speed Clicker",
+  "description": "Tap the button as many times as you can before the timer runs out.",
+  "author": "Microwave Games",
+  "version": "1.0.0",
+  "minTime": 15,
+  "maxTime": 300
+}

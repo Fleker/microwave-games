@@ -1,0 +1,17 @@
+{
+  "games": [
+    {
+      "id": "clicker",
+      "title": "Speed Clicker",
+      "description": "Tap the button as many times as you can before the timer runs out.",
+      "minTime": 15,
+      "maxTime": 300,
+      "path": "games/clicker/index.html",
+      "cacheFiles": [
+        "games/clicker/index.html",
+        "games/clicker/game.js",
+        "games/clicker/style.css"
+      ]
+    }
+  ]
+}

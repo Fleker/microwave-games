@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="72" fill="#0a0a0a"/>
+  <!-- Microwave body -->
+  <rect x="36" y="116" width="440" height="292" rx="22" fill="#141414" stroke="#2a2a2a" stroke-width="3"/>
+  <!-- LCD screen area -->
+  <rect x="52" y="132" width="308" height="260" rx="14" fill="#0c1a00"/>
+  <!-- Screen glow / inner bezel -->
+  <rect x="60" y="140" width="292" height="244" rx="10" fill="#001400"/>
+  <!-- MW text on screen -->
+  <text x="206" y="283" fill="#ffab00" font-family="'Courier New',Courier,monospace" font-size="110" font-weight="bold" text-anchor="middle">MW</text>
+  <!-- Control panel -->
+  <rect x="368" y="132" width="96" height="260" rx="0" fill="#1a1a1a"/>
+  <!-- Buttons -->
+  <rect x="380" y="152" width="72" height="28" rx="6" fill="#252525"/>
+  <rect x="380" y="192" width="72" height="28" rx="6" fill="#252525"/>
+  <rect x="380" y="232" width="72" height="28" rx="6" fill="#252525"/>
+  <rect x="380" y="272" width="72" height="28" rx="6" fill="#252525"/>
+  <!-- Start button (red-orange) -->
+  <rect x="378" y="318" width="76" height="56" rx="10" fill="#6b1a00"/>
+  <rect x="382" y="322" width="68" height="48" rx="8" fill="#cc3300"/>
+  <!-- Door handle bar -->
+  <rect x="358" y="224" width="6" height="76" rx="3" fill="#333"/>
+</svg>

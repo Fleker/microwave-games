@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Speed Clicker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Overlay: shown before game starts and after time is up -->
+  <div id="overlay" class="overlay">
+    <div id="overlay-label">READY?</div>
+    <div id="final-count" style="display:none">0</div>
+    <div class="overlay-unit" id="overlay-unit" style="display:none">CLICKS</div>
+    <div id="overlay-sub">tap as fast as you can</div>
+  </div>
+
+  <!-- Live stats (visible during play) -->
+  <div id="stats">
+    <div id="click-count" class="count">0</div>
+    <div id="cps" class="cps">0.0 CPS</div>
+  </div>
+
+  <!-- The big click target -->
+  <button id="click-btn" aria-label="Click!">CLICK!</button>
+
+  <script src="game.js"></script>
+</body>
+</html>

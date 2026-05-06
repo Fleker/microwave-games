@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Safe-zone background (fills full square for maskable) -->
+  <rect width="512" height="512" fill="#0a0a0a"/>
+  <!-- Microwave body (inset for maskable safe zone) -->
+  <rect x="56" y="136" width="400" height="252" rx="20" fill="#141414" stroke="#2a2a2a" stroke-width="3"/>
+  <!-- LCD screen area -->
+  <rect x="70" y="150" width="272" height="224" rx="12" fill="#001400"/>
+  <!-- MW text -->
+  <text x="206" y="284" fill="#ffab00" font-family="'Courier New',Courier,monospace" font-size="96" font-weight="bold" text-anchor="middle">MW</text>
+  <!-- Control panel -->
+  <rect x="348" y="150" width="96" height="224" rx="0" fill="#1a1a1a"/>
+  <!-- Buttons -->
+  <rect x="360" y="166" width="72" height="24" rx="5" fill="#252525"/>
+  <rect x="360" y="202" width="72" height="24" rx="5" fill="#252525"/>
+  <rect x="360" y="238" width="72" height="24" rx="5" fill="#252525"/>
+  <!-- Start button -->
+  <rect x="358" y="282" width="76" height="70" rx="10" fill="#6b1a00"/>
+  <rect x="362" y="286" width="68" height="62" rx="8" fill="#cc3300"/>
+</svg>

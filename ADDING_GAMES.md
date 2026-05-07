@@ -18,7 +18,7 @@ games/
     └── assets/         ← images, audio, etc.
 ```
 
-The folder name should match the `id` in `meta.json` and `registry.json`.
+The folder name should match the `id` in `meta.json` and `registry.json`. Your `index.html` file should be using absolute paths.
 
 ---
 

@@ -34,6 +34,7 @@ const ClickerGame = (() => {
         handleClick();
       }
     });
+    console.log('init')
 
     // Notify the platform we are ready
     window.parent.postMessage({ type: 'MICROWAVE_READY' }, '*');
@@ -49,6 +50,7 @@ const ClickerGame = (() => {
   // ── Lifecycle ─────────────────────────────────────────────────
 
   function start() {
+    console.log('game start')
     clicks  = 0;
     active  = true;
     startMs = performance.now();
@@ -76,6 +78,7 @@ const ClickerGame = (() => {
 
   function handleClick() {
     if (!active) return;
+    console.log('click')
     clicks++;
     flash();
     updateDisplay();
@@ -118,6 +121,8 @@ const ClickerGame = (() => {
   }
 
   // ── Bootstrap ─────────────────────────────────────────────────
-
+  console.log('bootstrap')
   document.addEventListener('DOMContentLoaded', init);
 })();
+
+console.log('game.js')

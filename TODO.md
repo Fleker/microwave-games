@@ -1,0 +1,2 @@
+- [ ] Mobile support
+- [ ] Send final score to final screen

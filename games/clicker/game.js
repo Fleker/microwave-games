@@ -61,6 +61,7 @@ const ClickerGame = (() => {
   function end() {
     active = false;
     cancelAnimationFrame(rafId);
+    reportScore(); // send final tally before platform navigates away
 
     // Show the "DING" overlay with final count
     $('overlay-label').textContent = 'DING!';

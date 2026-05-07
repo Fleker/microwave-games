@@ -4,7 +4,7 @@
  * Bump CACHE_NAME when you deploy changes that require a cache bust.
  */
 
-const CACHE_NAME = 'microwave-games-v1';
+const CACHE_NAME = 'microwave-games-v2';
 
 const APP_SHELL = [
   '/',
@@ -81,16 +81,22 @@ async function cacheFirst(request) {
   if (cached) return cached;
 
   try {
-    const response = await fetch(request);
+    // Use request.url (plain GET) instead of the full Request object so that
+    // navigate-mode requests don't cause fetch to fail in SW context.
+    const response = await fetch(request.url);
     if (response.ok) {
       const cache = await caches.open(CACHE_NAME);
       cache.put(request, response.clone());
     }
     return response;
   } catch (_) {
-    // Offline and not cached — return a minimal offline page for navigation
+    // Offline fallback: only serve the app shell for the root page.
+    // Game pages get a 503 so the iframe doesn't silently show the wrong content.
     if (request.mode === 'navigate') {
-      return caches.match('/index.html');
+      const url = new URL(request.url);
+      if (url.pathname === '/' || url.pathname === '/index.html') {
+        return caches.match('/index.html');
+      }
     }
     return new Response('Offline', { status: 503 });
   }
@@ -98,7 +104,7 @@ async function cacheFirst(request) {
 
 async function networkFirst(request) {
   try {
-    const response = await fetch(request);
+    const response = await fetch(request.url);
     if (response.ok) {
       const cache = await caches.open(CACHE_NAME);
       cache.put(request, response.clone());

@@ -1,21 +1,30 @@
 /**
  * Microwave Games — Service Worker
  * Strategy: cache-first for game assets, network-first for the registry.
+ *
+ * All cache keys are built from BASE (= self.registration.scope) so the SW
+ * works correctly whether the site is served from / (localhost) or from a
+ * subpath like /microwave-games/ (GitHub Pages).
+ *
  * Bump CACHE_NAME when you deploy changes that require a cache bust.
  */
 
-const CACHE_NAME = 'microwave-games-v2';
+const CACHE_NAME = 'microwave-games-v3';
+
+// self.registration.scope is the canonical base URL for this SW's scope,
+// e.g. 'http://localhost:3000/' or 'https://user.github.io/microwave-games/'
+const BASE = self.registration.scope;
 
 const APP_SHELL = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/css/main.css',
-  '/js/app.js',
-  '/js/game-registry.js',
-  '/icons/icon.svg',
-  '/icons/icon-maskable.svg',
-  '/games/registry.json',
+  BASE,
+  `${BASE}index.html`,
+  `${BASE}manifest.json`,
+  `${BASE}css/main.css`,
+  `${BASE}js/app.js`,
+  `${BASE}js/game-registry.js`,
+  `${BASE}icons/icon.svg`,
+  `${BASE}icons/icon-maskable.svg`,
+  `${BASE}games/registry.json`,
 ];
 
 // ── Install: pre-cache app shell + all registered game files ─────────────────
@@ -28,10 +37,12 @@ self.addEventListener('install', event => {
 
       // Fetch the registry and cache every game file listed in cacheFiles
       try {
-        const res = await fetch('/games/registry.json');
+        const res = await fetch(`${BASE}games/registry.json`);
         const { games } = await res.json();
         const gameFiles = games.flatMap(g =>
-          (g.cacheFiles || [g.path]).map(f => (f.startsWith('/') ? f : '/' + f))
+          (g.cacheFiles || [g.path]).map(f =>
+            f.startsWith('http') ? f : `${BASE}${f.replace(/^\//, '')}`
+          )
         );
         if (gameFiles.length) await cache.addAll(gameFiles);
       } catch (err) {
@@ -90,12 +101,14 @@ async function cacheFirst(request) {
     }
     return response;
   } catch (_) {
-    // Offline fallback: only serve the app shell for the root page.
-    // Game pages get a 503 so the iframe doesn't silently show the wrong content.
+    // Offline fallback: only serve the app shell for the scope root.
+    // Game iframe navigations get a 503 so they don't silently load
+    // the wrong page.
     if (request.mode === 'navigate') {
       const url = new URL(request.url);
-      if (url.pathname === '/' || url.pathname === '/index.html') {
-        return caches.match('/index.html');
+      const scopePath = new URL(BASE).pathname;
+      if (url.pathname === scopePath || url.pathname === `${scopePath}index.html`) {
+        return caches.match(`${BASE}index.html`);
       }
     }
     return new Response('Offline', { status: 503 });
